@@ -1,4 +1,4 @@
-{
+{  
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -15,8 +15,10 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    // 指定项目中可以使用哪些库的类型(Proxy/Window/Document)
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
+  // 哪些代码需要编译解析
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
@@ -24,5 +26,6 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  // 排除
   "exclude": ["node_modules"]
 }
