@@ -142,7 +142,9 @@ export default defineComponent({
       OtherSlotNames,
       isCreate,
       isUpdate,
-      isDelete
+      isDelete,
+      handleDelete,
+      handleUpdate
     }
   }
 })
