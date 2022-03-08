@@ -1,5 +1,8 @@
 export const tableconfig = {
-  title: '用户列表',
+  header: {
+    createBtn: '新建用户',
+    title: '用户列表'
+  },
   propList: [
     { prop: 'name', label: '用户名' },
     { prop: 'realname', label: '真实姓名' },

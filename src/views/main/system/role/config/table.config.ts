@@ -1,5 +1,8 @@
 export const tableconfig = {
-  title: '用户列表',
+  header: {
+    title: '角色列表',
+    createBtn: '新建角色'
+  },
   propList: [
     { prop: 'name', label: '角色名', minWidth: '100' },
     { prop: 'intro', label: '事务', minWidth: '100' },

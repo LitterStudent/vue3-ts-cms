@@ -1,13 +1,13 @@
 <template>
   <div class="page-search">
     <hd-form v-bind="config" v-model="formData">
-      <template #header>
-        <h2>高级检索</h2>
-      </template>
+      <template #header> </template>
       <template #footer>
         <div class="footer">
-          <el-button @click="handleReset">重置</el-button>
-          <el-button @click="handleSearch" type="primary">搜索</el-button>
+          <el-button @click="handleReset" size="large">重置</el-button>
+          <el-button @click="handleSearch" type="primary" size="large"
+            >搜索</el-button
+          >
         </div>
       </template>
     </hd-form>

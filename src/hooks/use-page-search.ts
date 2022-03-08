@@ -4,7 +4,7 @@ export function usePageSearch() {
   const pageContentRef = ref<InstanceType<typeof PageContent>>()
 
   const handlesearchEvent = (queryInfo: any) => {
-    // console.log(pageContentRef)
+    console.log(queryInfo)
     pageContentRef.value?.getPageData(queryInfo)
   }
   const handleResetEvent = () => {

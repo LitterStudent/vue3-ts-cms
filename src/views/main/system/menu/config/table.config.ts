@@ -1,5 +1,8 @@
 export const contentTableConfig = {
-  title: '菜单列表',
+  header: {
+    title: '菜单列表',
+    createBtn: '新建菜单'
+  },
   propList: [
     { prop: 'name', label: '菜单名称', minWidth: '100' },
     { prop: 'type', label: '类型', minWidth: '60' },

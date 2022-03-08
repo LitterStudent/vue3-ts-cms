@@ -1,8 +1,9 @@
 <template>
   <div class="nav-header">
-    <el-icon :size="25" class="fold-menu" @click="foldChange"
-      ><expand
-    /></el-icon>
+    <el-icon :size="25" class="fold-menu" @click="foldChange">
+      <expand v-if="!isFold"></expand>
+      <fold v-if="isFold"></fold>
+    </el-icon>
     <div class="content">
       <div>
         <Breadcrumb :breadcrumbs="breadcrumbs"></Breadcrumb>
@@ -20,11 +21,10 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>
+              <el-dropdown-item @click="handleLoginOut">
                 退出登录
                 <el-icon class="el-icon--right"><close /></el-icon>
               </el-dropdown-item>
-              <el-dropdown-item>我的信息</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -36,9 +36,11 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import Breadcrumb from '@/base-ui/breadcrumb'
 import { useRoute } from 'vue-router'
 import { pathmapBreadcrumb } from '@/utils/map-menus'
+import localStorage from '@/utils/cache'
 export default defineComponent({
   components: {
     Breadcrumb
@@ -46,6 +48,7 @@ export default defineComponent({
   emits: ['foldChange'],
   setup(props, { emit }) {
     const store = useStore()
+    const router = useRouter()
     const userName = computed(() => store.state.login.userInfo.name)
     let isFold = ref(false)
     const foldChange = () => {
@@ -57,11 +60,16 @@ export default defineComponent({
       const route = useRoute()
       return pathmapBreadcrumb(userMenus, route)
     })
+    const handleLoginOut = () => {
+      localStorage.clearCache()
+      router.push('/login')
+    }
     return {
       isFold,
       foldChange,
       userName,
-      breadcrumbs
+      breadcrumbs,
+      handleLoginOut
     }
   }
 })

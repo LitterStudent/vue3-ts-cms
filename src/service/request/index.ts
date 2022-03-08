@@ -48,7 +48,7 @@ class HDRequest {
         // console.log('所有的实例都有的拦截器:响应成功拦截')
         this.loading?.close()
         const data = res.data
-        console.log(res)
+        // console.log(res)
         return data
       },
       (err) => {
@@ -85,16 +85,16 @@ class HDRequest {
         })
     })
   }
-  get<T>(config: HDRquestConfig<T>): Promise<T> {
+  get<T = any>(config: HDRquestConfig<T>): Promise<T> {
     return this.reqest({ ...config, method: 'GET' })
   }
-  post<T>(config: HDRquestConfig<T>): Promise<T> {
+  post<T = any>(config: HDRquestConfig<T>): Promise<T> {
     return this.reqest({ ...config, method: 'POST' })
   }
-  patch<T>(config: HDRquestConfig<T>): Promise<T> {
+  patch<T = any>(config: HDRquestConfig<T>): Promise<T> {
     return this.reqest({ ...config, method: 'PATCH' })
   }
-  delete<T>(config: HDRquestConfig<T>): Promise<T> {
+  delete<T = any>(config: HDRquestConfig<T>): Promise<T> {
     return this.reqest({ ...config, method: 'DELETE' })
   }
 }

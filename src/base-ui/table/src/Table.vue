@@ -113,18 +113,21 @@ export default defineComponent({
 </script>
 
 <style scoped lang="less">
-.header {
-  display: flex;
-  height: 45px;
-  padding: 0 5px;
-  align-items: center;
-  justify-content: space-between;
-  .title {
-    font-size: 20px;
-    font-weight: 700;
-  }
-  .handler {
+.table {
+  padding: 20px;
+  .header {
+    display: flex;
+    height: 45px;
+    padding: 0 5px;
     align-items: center;
+    justify-content: space-between;
+    .title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .handler {
+      align-items: center;
+    }
   }
 }
 </style>

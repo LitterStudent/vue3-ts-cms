@@ -2,7 +2,7 @@ import { IForm } from '@/base-ui/from/type'
 export const formconfig: IForm = {
   labelWidth: 100,
   itemStyle: {
-    padding: '20px 20px'
+    padding: '10px 50px'
   },
   colLayout: {
     span: 8

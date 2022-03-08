@@ -33,7 +33,9 @@ import {
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElImage
+  ElImage,
+  ElTree,
+  ElCard
 } from 'element-plus'
 const components = [
   ElButton,
@@ -68,7 +70,9 @@ const components = [
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElImage
+  ElImage,
+  ElTree,
+  ElCard
 ]
 import {
   ArrowDown,
@@ -80,7 +84,10 @@ import {
   ChatLineRound,
   Expand,
   CloseBold,
-  Close
+  Close,
+  ChatLineSquare,
+  Fold,
+  Warning
 } from '@element-plus/icons-vue'
 export function registerElement(app: App): void {
   for (const component of components) {
@@ -96,4 +103,7 @@ export function registerElement(app: App): void {
   app.component(Expand.name, Expand)
   app.component(CloseBold.namem, CloseBold)
   app.component(Close.name, Close)
+  app.component(ChatLineSquare.name, ChatLineSquare)
+  app.component(Fold.name, Fold)
+  app.component(Warning.name, Warning)
 }

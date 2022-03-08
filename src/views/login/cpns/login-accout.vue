@@ -22,8 +22,8 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const account = reactive({
-      name: localStorage.getCache('name') ?? '',
-      password: localStorage.getCache('password') ?? ''
+      name: 'coderdong', //localStorage.getCache('password') ?? '',
+      password: '123456' //localStorage.getCache('password') ?? ''
     })
     const formRef = ref<InstanceType<typeof ElForm>>()
     const loginAction = (keepPassword: boolean) => {
@@ -34,7 +34,10 @@ export default defineComponent({
             localStorage.setCache('password', account.password)
           }
           console.log('登录成功的逻辑')
-          store.dispatch('login/accountLoginAction', { ...account })
+          store.dispatch('login/accountLoginAction', {
+            ...account,
+            name: 'coderwhy'
+          })
         } else {
           console.log('登录失败的逻辑')
         }

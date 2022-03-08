@@ -3,13 +3,15 @@
     <hd-table
       v-model:page="pageInfo"
       v-bind="contnetTableConfig"
-      title="用户列表"
+      :title="contnetTableConfig.header.title"
       :dataList="dataList"
       :listCount="dataCount"
     >
       <!-- table-header -->
       <template #headerHandler>
-        <el-button type="success" v-if="isCreate">添加</el-button>
+        <el-button type="success" v-if="isCreate" @click="handleCreate">
+          {{ contnetTableConfig.header.createBtn }}
+        </el-button>
       </template>
       <!-- table-content -->
       <template #enable="scope">
@@ -27,7 +29,7 @@
       <template #updateAt="scope">
         {{ $filters.formateDate(scope.row.createAt) }}
       </template>
-      <template #handler>
+      <template #handler="scope">
         <el-button
           type="primary"
           size="small"
@@ -40,7 +42,7 @@
           type="danger"
           size="small"
           v-if="isDelete"
-          @click="handleDelete"
+          @click="handleDelete(scope.row)"
         >
           删除</el-button
         >
@@ -80,7 +82,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(prop) {
+  emits: ['updateBtnClick', 'createBtnClick'],
+  setup(prop, { emit }) {
     const store = useStore()
     // 0获取按钮权限
     const isCreate = usePermission(prop.pageName, 'create')
@@ -91,7 +94,7 @@ export default defineComponent({
     // 1.
     const pageInfo = ref({
       currentPage: 1,
-      pageSize: 4
+      pageSize: 10
     })
     watch(pageInfo, () => {
       getPageData()
@@ -116,10 +119,10 @@ export default defineComponent({
     const dataList = computed(() =>
       store.getters[`system/pageListData`](prop.pageName)
     )
-    // 4.
+    // 4. 动态插槽
     const OtherSlotNames = prop.contnetTableConfig?.propList.filter(
       (item: any) => {
-        if (item.slotName === 'status') return false
+        if (item.slotName === 'enable') return false
         if (item.slotName === 'createAt') return false
         if (item.slotName === 'updateAt') return false
         if (item.slotName === 'handler') return false
@@ -127,11 +130,23 @@ export default defineComponent({
       }
     )
     // 5.
-    const handleDelete = () => {
-      console.log(11)
+    const handleDelete = async (item: any) => {
+      console.log(item)
+      // 删除该项
+      store.dispatch('system/deletePageDataAction', {
+        pageName: prop.pageName,
+        id: item.id
+      })
+      // 获取删除后的表格数据
+      getPageData()
     }
-    const handleUpdate = () => {
-      console.log(22)
+    const handleUpdate = (item: any) => {
+      // console.log(22)
+      emit('updateBtnClick', item)
+    }
+
+    const handleCreate = () => {
+      emit('createBtnClick')
     }
 
     return {
@@ -144,7 +159,8 @@ export default defineComponent({
       isUpdate,
       isDelete,
       handleDelete,
-      handleUpdate
+      handleUpdate,
+      handleCreate
     }
   }
 })

@@ -67,8 +67,22 @@ export function mapMenusToPermissions(userMenus: any[]): any[] {
     }
   }
   _recursetGetPermission(userMenus)
-  console.log(permission)
+  // console.log(permission)
   return permission
+}
+export function menusMapLeafKeys(menuList: any[]) {
+  const leafKeys: number[] = []
+  const _recursetGetLeafKeys = function (menus: any) {
+    for (const menu of menus) {
+      if (menu.children) {
+        _recursetGetLeafKeys(menu.children)
+      } else {
+        leafKeys.push(menu.id)
+      }
+    }
+  }
+  _recursetGetLeafKeys(menuList)
+  return leafKeys
 }
 
 export { firstMenu }

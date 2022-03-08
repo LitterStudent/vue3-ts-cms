@@ -6,12 +6,8 @@
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.value">
-          <el-col v-bind="colLayout">
-            <el-form-item
-              :label="item.label"
-              :rules="item.rules"
-              :style="itemStyle"
-            >
+          <el-col v-bind="colLayout" v-if="!item.isHidden" :style="itemStyle">
+            <el-form-item :label="item.label" :rules="item.rules">
               <template v-if="item.type === 'input'">
                 <el-input
                   :model-value="modelValue[`${item.field}`]"
@@ -39,7 +35,7 @@
                 >
                   <el-option
                     v-for="option in item.options"
-                    :key="option.value"
+                    :key="option.title"
                     :value="option.value"
                   >
                     {{ option.label }}
@@ -103,16 +99,6 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup(prop, { emit }) {
-    // let formData = ref({ ...prop.modelValue })
-    // // console.log(formData)
-
-    // watch(
-    //   formData,
-    //   (newValue) => {
-    //     emit('update:modelValue', newValue)
-    //   },
-    //   { deep: true }
-    // )
     const handelModel = (value: string, field: string) => {
       emit(`update:modelValue`, { ...prop.modelValue, [field]: value })
     }
@@ -121,4 +107,9 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.hdform {
+  background-color: #fff;
+  padding: 20px;
+}
+</style>

@@ -2,7 +2,7 @@
   <div class="nav-menu">
     <div class="logo">
       <img class="img" src="~@/assets/img/logo.svg" alt="logo " />
-      <span v-if="!collapse" class="title">VUE3+TS</span>
+      <span v-if="!collapse" class="title">VUE3Admin</span>
     </div>
     <el-menu
       active-text-color="#ffd04b"
@@ -16,7 +16,14 @@
         <template v-if="item.type === 1">
           <el-sub-menu :index="item.id + ''">
             <template #title>
-              <i v-if="item.icon" :class="item.icon"></i>
+              <el-icon>
+                <setting v-if="item.icon === 'el-icon-setting'"></setting>
+                <monitor v-if="item.icon === 'el-icon-monitor'"></monitor>
+                <goods v-if="item.icon === 'el-icon-goods'"></goods>
+                <chat-line-round
+                  v-if="item.icon === 'el-icon-chat-line-round'"
+                ></chat-line-round>
+              </el-icon>
               <span>{{ item.name }}</span>
             </template>
             <template v-for="subitem in item.children" :key="subitem.id">
@@ -24,7 +31,6 @@
                 :index="subitem.id + ''"
                 @click="handleClick(subitem)"
               >
-                <i v-if="subitem.icon" :class="subitem.icon"></i>
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
             </template>
@@ -68,7 +74,7 @@ export default defineComponent({
     const route = useRoute()
     const menu = pathmapMenu(userMenus.value, route)
     const defaultActiveMenu = menu.id + ''
-    console.log(defaultActiveMenu)
+    // console.log(defaultActiveMenu)
     return { userMenus, handleClick, defaultActiveMenu }
   }
 })
@@ -88,7 +94,8 @@ export default defineComponent({
     align-items: center;
     .img {
       height: 100%;
-      margin: 0 10px;
+      margin-left: 7px;
+      margin-right: 25px;
     }
 
     .title {
