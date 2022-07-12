@@ -49,7 +49,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       localCache.setCache('token', token)
       // 发送初始化请求 （role,department）
       console.log('11')
-      dispatch('getInitalDataAction', null, { root: true })
+      dispatch('getInitialDataAction', null, { root: true })
       // 2. 获取用户信息
       const userInfoResult = await userInfoRequest(id)
       const userInfo = userInfoResult.data
@@ -74,6 +74,7 @@ const loginModule: Module<ILoginState, IRootState> = {
     loadLocalLogin({ commit, dispatch }) {
       const token = localCache.getCache('token')
       if (token) {
+        console.log('object')
         commit('changeToken', token)
         // 发送初始化的请求(完整的role/department)
         dispatch('getInitialDataAction', null, { root: true })

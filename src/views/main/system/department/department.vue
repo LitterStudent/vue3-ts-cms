@@ -1,5 +1,6 @@
 <template>
   <div class="department">
+    <h2>{{ msg }}</h2>
     <page-search :config="formconfig"></page-search>
     <page-contnet
       pageName="department"
@@ -30,13 +31,16 @@ export default defineComponent({
   setup() {
     const [pageModalRef, defaultInfo, handleCreate, handleUpdate] =
       usePageModal()
+    console.log(111)
+    let msg = 1111122334
     return {
       pageModalRef,
       formconfig,
       contentTableConfig,
       modalconfig,
       handleCreate,
-      handleUpdate
+      handleUpdate,
+      msg
     }
   }
 })
